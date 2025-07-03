@@ -15,7 +15,8 @@ RUN apt-get update --fix-missing && \
     
 COPY . .
 
-RUN poetry self add poetry-dynamic-versioning && \
+RUN poetry lock && \
+poetry self add poetry-dynamic-versioning && \
     poetry config virtualenvs.in-project true && \
     poetry install && \
     rm -rf /app/.git
