@@ -8,6 +8,11 @@ RUN pip install pipx && \
     pipx install poetry
 RUN apt update && apt install -y git
 
+RUN apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
+        git build-essential cmake pkg-config libssl-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+    
 COPY . .
 
 RUN poetry self add poetry-dynamic-versioning && \
